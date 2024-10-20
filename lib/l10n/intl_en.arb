@@ -1,0 +1,17 @@
+{
+  "login": "Login",
+  "password": "Password",
+  "enter": "Enter",
+  "rememberMe": "Remember me",
+  "date": "Date",
+  "branch": "Branch",
+  "orders": "Orders",
+  "revenue": "Revenue",
+  "avgOrder": "Avg order",
+  "total": "Total",
+  "previousDay": "Previous day",
+  "includeOpenOrder": "Include open orders",
+  "openOrders": "Open orders",
+  "orderRemovalRequest": "Order removal request",
+  "dishRemovalRequest": "Dish removal request"
+}

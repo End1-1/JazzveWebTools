@@ -1,0 +1,44 @@
+### IntelliJ IDEA ###
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+/build/
+build
+build/
+.dart_tool
+.dart_tool/
+./build/
+/.dart_tool/
+./.dart_tool/
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+*java_pid*
+*hs_err*
+*replay_pid*
+.idea
+*.idea
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store
+/build/
+/.idea/
+/.dart_tool/

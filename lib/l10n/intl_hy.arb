@@ -1,0 +1,15 @@
+{
+  "login": "Մուտքանուն",
+  "password": "Գախտնաբառ",
+  "enter": "Մուտք",
+  "rememberMe": "Հիշել ինձ",
+  "date": "Ամսաթիվ",
+  "branch": "Մասնաճյուղ",
+  "orders": "Պատվերներ",
+  "revenue": "Հասույթ",
+  "avgOrder": "Միջին",
+  "total": "Ընդամենը",
+  "previousDay": "Նախորդ օր",
+  "includeOpenOrder": "Նեռարյալ բաց պատվերները",
+  "openOrders": "Բաց պատվերներ"
+}
