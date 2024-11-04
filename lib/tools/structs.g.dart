@@ -50,3 +50,41 @@ Map<String, dynamic> _$$CafeRecordListImplToJson(
     <String, dynamic>{
       'list': instance.list,
     };
+
+_$OrderRemovalRecordImpl _$$OrderRemovalRecordImplFromJson(
+        Map<String, dynamic> json) =>
+    _$OrderRemovalRecordImpl(
+      ID: json['ID'] as String,
+      STATE_ID: (json['STATE_ID'] as num).toInt(),
+      DATE_OPEN: json['DATE_OPEN'] as String,
+      DATE_CLOSE: json['DATE_CLOSE'] as String,
+      AMOUNT: (json['AMOUNT'] as num).toDouble(),
+      CANCELREQUEST: (json['CANCELREQUEST'] as num).toInt(),
+    );
+
+Map<String, dynamic> _$$OrderRemovalRecordImplToJson(
+        _$OrderRemovalRecordImpl instance) =>
+    <String, dynamic>{
+      'ID': instance.ID,
+      'STATE_ID': instance.STATE_ID,
+      'DATE_OPEN': instance.DATE_OPEN,
+      'DATE_CLOSE': instance.DATE_CLOSE,
+      'AMOUNT': instance.AMOUNT,
+      'CANCELREQUEST': instance.CANCELREQUEST,
+    };
+
+_$OrderRemovalRecordListImpl _$$OrderRemovalRecordListImplFromJson(
+        Map<String, dynamic> json) =>
+    _$OrderRemovalRecordListImpl(
+      CAFE: json['CAFE'] as String,
+      DATA: (json['DATA'] as List<dynamic>)
+          .map((e) => OrderRemovalRecord.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$$OrderRemovalRecordListImplToJson(
+        _$OrderRemovalRecordListImpl instance) =>
+    <String, dynamic>{
+      'CAFE': instance.CAFE,
+      'DATA': instance.DATA,
+    };

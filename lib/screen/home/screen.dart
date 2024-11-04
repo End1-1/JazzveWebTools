@@ -4,17 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:jazzve_web/screen/base/screen.dart';
-import 'package:jazzve_web/screen/tools/acheckbox.dart';
-import 'package:jazzve_web/screen/tools/adate.dart';
-import 'package:jazzve_web/screen/tools/bloc.dart';
-import 'package:jazzve_web/screen/tools/prefs.dart';
-import 'package:jazzve_web/screen/tools/structs.dart';
+import 'package:jazzve_web/tools/acheckbox.dart';
+import 'package:jazzve_web/tools/bloc.dart';
+import 'package:jazzve_web/tools/prefs.dart';
+import 'package:jazzve_web/tools/structs.dart';
 
 part 'screen.part.dart';
 
 class HomeScreen extends Screen {
-  var _date1 = DateTime.now();
-  var _date2 = DateTime.now();
   double _totalAmount = 0;
   double _totalQtn = 0;
   double _avgOrder = 0;
@@ -25,8 +22,6 @@ class HomeScreen extends Screen {
   double _totalQtno = 0;
   double _avgOrdero = 0;
   var _includeOpenOrders = true;
-  late Function _getDateFunction;
-  late Function(DateTime) _setDateFunction;
 
   static const cellDecorationWithTop = BoxDecoration(
       border: Border.fromBorderSide(BorderSide(color: Colors.black26)));
@@ -39,10 +34,6 @@ class HomeScreen extends Screen {
           right: BorderSide(color: Colors.black26)));
 
   HomeScreen({super.key}) {
-    _date1 = DateTime(_date1.year, _date1.month, _date1.day);
-    _date2 = _date1;
-    _getDateFunction = _getDate1;
-    _setDateFunction = _setDate1;
     _refresh();
   }
 
@@ -55,27 +46,31 @@ class HomeScreen extends Screen {
           BlocBuilder<AnimBloc, ASAnim>(builder: (builder, state) {
             return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               IconButton(
-                  onPressed: _previousDay,
-                  icon: Icon(Icons.chevron_left, size: 30)),
+                  onPressed: previousDay,
+                  icon: const Icon(Icons.chevron_left, size: 30)),
               columnSpace(),
               InkWell(
-                onTap: _openDate1,
-                child: Text(DateFormat('dd/MM/yyyy').format(_date1)),
+                onTap: openDate1,
+                child: Text(DateFormat('dd/MM/yyyy').format(date1)),
               ),
               const Text(" - "),
               InkWell(
-                onTap: _openDate2,
-                child: Text(DateFormat('dd/MM/yyyy').format(_date2)),
+                onTap: openDate2,
+                child: Text(DateFormat('dd/MM/yyyy').format(date2)),
               ),
               columnSpace(),
               IconButton(
-                  onPressed: _nextDay,
-                  icon: Icon(Icons.chevron_right, size: 30)),
+                  onPressed: nextDay,
+                  icon: const Icon(Icons.chevron_right, size: 30)),
               columnSpace(),
               IconButton(
                   onPressed: _refresh, icon: const Icon(Icons.refresh_sharp))
             ]);
           }),
+          rowSpace(),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [Text(locale().revenue)]),
           rowSpace(),
           Row(children: [
             ACheckBox(_includeOpenOrders, locale().includeOpenOrder,
@@ -85,9 +80,6 @@ class HomeScreen extends Screen {
           Expanded(child: SingleChildScrollView(child: _cafeList()))
         ],
       ),
-      BlocBuilder<AnimBloc, ASAnim>(builder: (context, state) {
-        return ScreenDate(_getDateFunction(), _setDateFunction);
-      })
     ]);
   }
 
@@ -127,13 +119,11 @@ class HomeScreen extends Screen {
                   rowSpace(),
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     Text(
-                        '${locale().previousDay} ${DateFormat('dd/MM/yyyy').format(_date1.add(const Duration(days: -1)))}')
+                        '${locale().previousDay} ${DateFormat('dd/MM/yyyy').format(date1.add(const Duration(days: -1)))}')
                   ]),
                   _header(),
                   for (final c in l.list) ...[_cafeRowPrev(c)],
                   _totalRowPrev(),
-
-
                   rowSpace(),
                 ]);
           }

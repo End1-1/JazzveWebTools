@@ -1,10 +1,59 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:jazzve_web/screen/base/screen.dart';
+import 'package:jazzve_web/tools/bloc.dart';
+import 'package:jazzve_web/tools/prefs.dart';
+
+part 'screen.part.dart';
 
 class DishRemovalRequestScreen extends Screen {
+  DishRemovalRequestScreen({super.key}) {
+    _refresh();
+  }
+
   @override
   Widget body(BuildContext context) {
-    return Text('dish removal request');
+    return Column(
+      children: [
+        rowSpace(),
+        BlocBuilder<AnimBloc, ASAnim>(builder: (builder, state) {
+          return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            IconButton(
+                onPressed: previousDay,
+                icon: const Icon(Icons.chevron_left, size: 30)),
+            columnSpace(),
+            InkWell(
+              onTap: openDate1,
+              child: Text(DateFormat('dd/MM/yyyy').format(date1)),
+            ),
+            const Text(" - "),
+            InkWell(
+              onTap: openDate2,
+              child: Text(DateFormat('dd/MM/yyyy').format(date2)),
+            ),
+            columnSpace(),
+            IconButton(
+                onPressed: nextDay,
+                icon: const Icon(Icons.chevron_right, size: 30)),
+            columnSpace(),
+            IconButton(
+                onPressed: _refresh, icon: const Icon(Icons.refresh_sharp))
+          ]);
+        }),
+        rowSpace(),
+        Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [Text(locale().dishRemovalRequest)]),
+        rowSpace(),
+        rowSpace(),
+        Expanded(child: SingleChildScrollView(child: _report()))
+      ],
+    );
+  }
+
+  Widget _report() {
+    return Text('aa');
   }
 
 }

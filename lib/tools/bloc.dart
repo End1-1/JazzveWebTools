@@ -4,17 +4,27 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
-import 'package:jazzve_web/screen/tools/prefs.dart';
+import 'package:jazzve_web/tools/prefs.dart';
 
 class ASBase {
+  static int _counter = 0;
+  late final int version;
   var loading = false;
   var message = '';
   var body = '';
+  ASBase() {
+    version = ++ _counter;
+    print('ASBASE VERSOIN $version');
+  }
 }
 
 class ASQueryDone extends ASBase {}
 
 class ASQueryCafeList extends ASBase{}
+
+class ASQueryOrderRemovalRequests extends ASBase{}
+
+class ASQueryDishRemovalRequests extends ASBase{}
 
 class ASQueryCafeTotal extends ASBase {
   final int cafe;
@@ -66,9 +76,18 @@ class ABloc extends Bloc<AEBase, ASBase> {
   }
 }
 
-class ASAnim {}
+class ASAnim {
+  static int _counter = 0;
+  late final int version;
+  ASAnim() {
+    version = ++ _counter;
+    print('ASAnim VERSION $version');
+  }
+}
 
-class ASAnimForward extends ASAnim {}
+class ASAnimForward extends ASAnim {
+
+}
 
 class ASAnimBackward extends ASAnim {}
 

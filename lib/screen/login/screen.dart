@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jazzve_web/screen/base/screen.dart';
 import 'package:jazzve_web/screen/home/screen.dart';
-import 'package:jazzve_web/screen/tools/acheckbox.dart';
-import 'package:jazzve_web/screen/tools/bloc.dart';
-import 'package:jazzve_web/screen/tools/prefs.dart';
+import 'package:jazzve_web/tools/acheckbox.dart';
+import 'package:jazzve_web/tools/bloc.dart';
+import 'package:jazzve_web/tools/prefs.dart';
 
 part 'screen.part.dart';
 

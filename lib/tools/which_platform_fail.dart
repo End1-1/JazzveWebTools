@@ -1,0 +1,3 @@
+bool isWebMobile() {
+  return false;
+}

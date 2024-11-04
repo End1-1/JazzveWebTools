@@ -126,3 +126,25 @@ class CafeRecordList with _$CafeRecordList {
     return 0;
   }
 }
+
+@freezed
+class OrderRemovalRecord with _$OrderRemovalRecord {
+  const factory OrderRemovalRecord({
+    required String ID,
+    required int STATE_ID,
+    required String DATE_OPEN,
+    required String DATE_CLOSE,
+    required double AMOUNT,
+    required int CANCELREQUEST
+}) = _OrderRemovalRecord;
+  factory OrderRemovalRecord.fromJson(Map<String, dynamic> json) => _$OrderRemovalRecordFromJson(json);
+}
+
+@freezed
+class OrderRemovalRecordList with _$OrderRemovalRecordList {
+  const factory OrderRemovalRecordList({
+    required String CAFE,
+    required List<OrderRemovalRecord> DATA
+})=_OrderRemovalRecordList;
+  factory OrderRemovalRecordList.fromJson(Map<String, dynamic> json) => _$OrderRemovalRecordListFromJson(json);
+}
