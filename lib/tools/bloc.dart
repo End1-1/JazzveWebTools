@@ -12,22 +12,25 @@ class ASBase {
   var loading = false;
   var message = '';
   var body = '';
+  var errorCode = 200;
+
   ASBase() {
-    version = ++ _counter;
+    version = ++_counter;
     print('ASBASE VERSOIN $version');
   }
 }
 
 class ASQueryDone extends ASBase {}
 
-class ASQueryCafeList extends ASBase{}
+class ASQueryCafeList extends ASBase {}
 
-class ASQueryOrderRemovalRequests extends ASBase{}
+class ASQueryOrderRemovalRequests extends ASBase {}
 
-class ASQueryDishRemovalRequests extends ASBase{}
+class ASQueryDishRemovalRequests extends ASBase {}
 
 class ASQueryCafeTotal extends ASBase {
   final int cafe;
+
   ASQueryCafeTotal(this.cafe);
 }
 
@@ -36,7 +39,8 @@ class AEBase {}
 class AEWebQuery<T extends ASBase> extends AEBase {
   final Map<String, String> data;
   T state;
-  AEWebQuery(this.data, this.state) ;
+
+  AEWebQuery(this.data, this.state);
 }
 
 class ABloc extends Bloc<AEBase, ASBase> {
@@ -62,10 +66,11 @@ class ABloc extends Bloc<AEBase, ASBase> {
     final bodyStr = utf8.decode(response.bodyBytes);
     if (kDebugMode) {
       print('request ${e.data}');
-      print('response ${response.statusCode} ${bodyStr}');
+      print('response ${response.statusCode} $bodyStr');
     }
     if (response.statusCode > 299) {
       emit(ASQueryDone()
+        ..errorCode = response.statusCode
         ..loading = false
         ..message = bodyStr);
       return;
@@ -79,15 +84,14 @@ class ABloc extends Bloc<AEBase, ASBase> {
 class ASAnim {
   static int _counter = 0;
   late final int version;
+
   ASAnim() {
-    version = ++ _counter;
+    version = ++_counter;
     print('ASAnim VERSION $version');
   }
 }
 
-class ASAnimForward extends ASAnim {
-
-}
+class ASAnimForward extends ASAnim {}
 
 class ASAnimBackward extends ASAnim {}
 

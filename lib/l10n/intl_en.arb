@@ -13,5 +13,14 @@
   "includeOpenOrder": "Include open orders",
   "openOrders": "Open orders",
   "orderRemovalRequest": "Order removal request",
-  "dishRemovalRequest": "Dish removal request"
+  "dishRemovalRequest": "Dish removal request",
+  "orderNum": "Order number",
+  "dateOpen": "Opened",
+  "table": "Table",
+  "amount": "Amount",
+  "state": "State",
+  "action": "Action",
+  "confirmToCancelOrder": "Confirm to cancel order",
+  "yes": "Yes",
+  "no": "No"
 }

@@ -17,4 +17,9 @@ extension ScreenExt on Screen {
   void _showMenu() {
       BlocProvider.of<AnimBloc>(prefs.context()).add(AEAnimGo(ASAnimMenuOpen()));
   }
+
+  void _logout() {
+    BlocProvider.of<ABloc>(prefs.context()).add(AEBase());
+    Navigator.pushAndRemoveUntil(prefs.context(), MaterialPageRoute(builder: (builder) => LoginScreen()), (_) => false);
+  }
 }

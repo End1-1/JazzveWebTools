@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jazzve_web/screen/dish_removal_request/screen.dart';
 import 'package:jazzve_web/screen/home/screen.dart';
+import 'package:jazzve_web/screen/login/screen.dart';
 import 'package:jazzve_web/screen/order_removal_request/screen.dart';
 import 'package:jazzve_web/tools/bloc.dart';
 import 'package:jazzve_web/tools/prefs.dart';
@@ -24,7 +25,7 @@ abstract class Screen extends StatelessWidget {
   late Function(DateTime) setDateFunction;
 
   double _menuPos = 0;
-  static String currentPageName = '';
+  static String currentPageName = 'revenu';
 
   Screen({super.key}) {
     date1 = DateTime(date1.year, date1.month, date1.day);
@@ -98,7 +99,7 @@ abstract class Screen extends StatelessWidget {
                     ])),
                 rowSpace(),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  TextButton(onPressed: dialogOk, child: Text('OK'))
+                  TextButton(onPressed:  state.errorCode == 401 ? _logout : dialogOk, child: Text('OK'))
                 ]),
                 Expanded(child: Container()),
               ],
