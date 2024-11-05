@@ -10,7 +10,7 @@ extension OrderRemovalRequestExt on OrderRemovalRequestScreen {
     }, ASQueryOrderRemovalRequests()));
   }
 
-  void _openOrder(String id) {}
+  void _openOrder(String id, int cafeid) {}
 
   void _accept(String id, int cafe) {
     showDialog(

@@ -11,16 +11,18 @@ import 'package:jazzve_web/screen/login/screen.dart';
 import 'package:jazzve_web/screen/order_removal_request/screen.dart';
 import 'package:jazzve_web/tools/bloc.dart';
 import 'package:jazzve_web/tools/prefs.dart';
-import 'package:jazzve_web/tools/which_platform_fail.dart' if (dart.library.html)  'package:jazzve_web/tools/which_platform.dart';
+import 'package:jazzve_web/tools/which_platform_fail.dart' if (dart.library.html) 'package:jazzve_web/tools/which_platform.dart';
 
 part 'screen.dates.dart';
 part 'screen.menu.dart';
+
 part 'screen.part.dart';
 
 abstract class Screen extends StatelessWidget {
   var date1 = DateTime.now();
   var date2 = DateTime.now();
   var tempDate = DateTime.now();
+  var menuButton = true;
   late Function getDateFunction;
   late Function(DateTime) setDateFunction;
 
@@ -49,7 +51,7 @@ abstract class Screen extends StatelessWidget {
           ]),
           loading(context),
           dialog(context),
-          menu(context),
+          if (menuButton) menu(context),
           dates()
         ],
       )),
@@ -99,7 +101,9 @@ abstract class Screen extends StatelessWidget {
                     ])),
                 rowSpace(),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  TextButton(onPressed:  state.errorCode == 401 ? _logout : dialogOk, child: Text('OK'))
+                  TextButton(
+                      onPressed: state.errorCode == 401 ? _logout : dialogOk,
+                      child: Text('OK'))
                 ]),
                 Expanded(child: Container()),
               ],
@@ -119,7 +123,9 @@ abstract class Screen extends StatelessWidget {
   Widget dates() {
     return BlocConsumer<AnimBloc, ASAnim>(listener: (builder, state) {
       if (state is ASAnimForward) {
-        if (Platform.isWindows || Platform.isMacOS || (kIsWeb && !isWebMobile())) {
+        if (Platform.isWindows ||
+            Platform.isMacOS ||
+            (kIsWeb && !isWebMobile())) {
           showDatePicker(
             context: prefs.context(),
             initialDate: getDateFunction(),

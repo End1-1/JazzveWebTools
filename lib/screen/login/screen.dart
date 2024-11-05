@@ -15,7 +15,9 @@ class LoginScreen extends Screen {
   final _passwordController = TextEditingController();
   var _rememberMeCheck = false;
 
-  LoginScreen({super.key});
+  LoginScreen({super.key}) {
+    menuButton = false;
+  }
 
   @override
   Widget body(BuildContext context) {

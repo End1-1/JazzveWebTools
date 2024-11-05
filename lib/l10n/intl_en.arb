@@ -22,5 +22,8 @@
   "action": "Action",
   "confirmToCancelOrder": "Confirm to cancel order",
   "yes": "Yes",
-  "no": "No"
+  "no": "No",
+  "dish": "Dish",
+  "qty": "Quantity",
+  "price": "Price"
 }

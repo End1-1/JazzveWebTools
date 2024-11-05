@@ -107,7 +107,7 @@ class OrderRemovalRequestScreen extends Screen {
               child: Row(children: [
                 IconButton(
                     onPressed: () {
-                      _openOrder(e['ID']);
+                      _openOrder(e['ID'], cafeid);
                     },
                     icon: const Icon(Icons.folder_open_rounded)),
                 columnSpace(),
