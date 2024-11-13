@@ -9,6 +9,7 @@ import 'package:jazzve_web/screen/login/screen.dart';
 import 'package:jazzve_web/screen/splash/screen.dart';
 import 'package:jazzve_web/tools/bloc.dart';
 import 'package:jazzve_web/tools/prefs.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -58,6 +59,14 @@ class App extends StatelessWidget {
     if (!Tools.prefsIsInitialized) {
       prefs = await SharedPreferences.getInstance();
       Tools.prefsIsInitialized = true;
+      final packageInfo = await PackageInfo.fromPlatform();
+        String appName = packageInfo.appName;
+        prefs.setString('appname', appName);
+        //String packageName = packageInfo.packageName;
+        String version = packageInfo.version;
+        String buildNumber = packageInfo.buildNumber;
+        prefs.setString('appversion', '$version.$buildNumber');
+
     }
      if ((prefs.getString('bearer') ?? '').isNotEmpty) {
        final response = await http

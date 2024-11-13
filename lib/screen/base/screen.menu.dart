@@ -3,7 +3,9 @@ part of 'screen.dart';
 extension ScreenMenu on Screen {
   Widget menuHeader(BuildContext context) {
     return Row(
-      children: [IconButton(onPressed: _showMenu, icon: Icon(Icons.menu))],
+      children: [
+        if (menuButton) IconButton(onPressed: _showMenu, icon: Icon(Icons.menu))
+      ],
     );
   }
 
@@ -48,7 +50,7 @@ extension ScreenMenu on Screen {
                     hideMenu();
                   },
                   child: Container(
-                    padding: const EdgeInsets.fromLTRB(10,10, 10, 0),
+                      padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                       color: Color(0xffffffff),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -62,7 +64,8 @@ extension ScreenMenu on Screen {
                                 Image.asset('assets/icon.png', height: 50),
                                 columnSpace(),
                                 Text('Jazzve Web Tools')
-                              ]),const Divider(thickness: 5, color: Colors.indigo),
+                              ]),
+                              const Divider(thickness: 5, color: Colors.indigo),
                               rowSpace(),
                               _menuItem(
                                   _revenu,
@@ -73,13 +76,21 @@ extension ScreenMenu on Screen {
                                   _orderRemovalRequest,
                                   'assets/orderremove.png',
                                   locale().orderRemovalRequest,
-                                  Screen.currentPageName == 'orderremovalrequest'),
+                                  Screen.currentPageName ==
+                                      'orderremovalrequest'),
                               _menuItem(
                                   _dishRemovalRequest,
                                   'assets/removedish.png',
                                   locale().dishRemovalRequest,
-                                  Screen.currentPageName == 'dishRemovalRequest'),
-
+                                  Screen.currentPageName ==
+                                      'dishRemovalRequest'),
+                              rowSpace(),
+                              Row(
+                                children: [
+                                  Text(prefs.getString('appversion') ??
+                                      'Unknown')
+                                ],
+                              )
                             ],
                           )
                         ],
@@ -120,7 +131,6 @@ extension ScreenMenu on Screen {
           ),
           const Row(children: [
             Expanded(child: Divider()),
-
           ])
         ])));
   }
@@ -146,7 +156,7 @@ extension ScreenMenu on Screen {
   void _revenu() {
     hideMenu();
     Screen.currentPageName = 'revenu';
-    Navigator.push(prefs.context(),
-        MaterialPageRoute(builder: (builder) => HomeScreen()));
+    Navigator.push(
+        prefs.context(), MaterialPageRoute(builder: (builder) => HomeScreen()));
   }
 }

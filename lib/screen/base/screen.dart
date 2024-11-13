@@ -14,6 +14,7 @@ import 'package:jazzve_web/tools/prefs.dart';
 import 'package:jazzve_web/tools/which_platform_fail.dart' if (dart.library.html) 'package:jazzve_web/tools/which_platform.dart';
 
 part 'screen.dates.dart';
+
 part 'screen.menu.dart';
 
 part 'screen.part.dart';
@@ -42,19 +43,20 @@ abstract class Screen extends StatelessWidget {
       backgroundColor: Colors.white,
       body: SafeArea(
           child: Stack(
-        children: [
-          Column(children: [
-            menuHeader(context),
-            Expanded(
-                child: Container(
-                    padding: const EdgeInsets.all(10), child: body(context)))
-          ]),
-          loading(context),
-          dialog(context),
-          if (menuButton) menu(context),
-          dates()
-        ],
-      )),
+            children: [
+              Column(children: [
+                menuHeader(context),
+                Expanded(
+                    child: Container(
+                        padding: const EdgeInsets.all(10),
+                        child: body(context)))
+              ]),
+              loading(context),
+              dialog(context),
+              if (menuButton) menu(context),
+              dates()
+            ],
+          )),
     );
   }
 
@@ -67,7 +69,7 @@ abstract class Screen extends StatelessWidget {
       }
       return Container(
         color: Colors.white,
-        child: Column(children: [
+        child: const Column(children: [
           Expanded(child: Center(child: CircularProgressIndicator()))
         ]),
       );
@@ -86,8 +88,12 @@ abstract class Screen extends StatelessWidget {
             padding: const EdgeInsets.all(20),
             decoration: const BoxDecoration(color: Colors.white),
             constraints: BoxConstraints(
-                maxHeight: MediaQuery.sizeOf(context).height * 0.5,
-                maxWidth: MediaQuery.sizeOf(context).width * 0.7),
+                maxHeight: MediaQuery
+                    .sizeOf(context)
+                    .height * 0.5,
+                maxWidth: MediaQuery
+                    .sizeOf(context)
+                    .width * 0.7),
             child: Column(
               children: [
                 Expanded(child: Container()),
@@ -95,10 +101,10 @@ abstract class Screen extends StatelessWidget {
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                      Expanded(
-                          child:
+                          Expanded(
+                              child:
                               Text(state.message, textAlign: TextAlign.center))
-                    ])),
+                        ])),
                 rowSpace(),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   TextButton(
@@ -121,11 +127,11 @@ abstract class Screen extends StatelessWidget {
   }
 
   Widget dates() {
+    var show = false;
     return BlocConsumer<AnimBloc, ASAnim>(listener: (builder, state) {
       if (state is ASAnimForward) {
-        if (Platform.isWindows ||
-            Platform.isMacOS ||
-            (kIsWeb && !isWebMobile())) {
+        if (!isWebMobile()) {
+          show = true;
           showDatePicker(
             context: prefs.context(),
             initialDate: getDateFunction(),
@@ -139,14 +145,9 @@ abstract class Screen extends StatelessWidget {
         }
       }
     }, builder: (builder, state) {
-      if (Platform.isWindows || Platform.isMacOS) {
-        return Container();
-      }
-      if (kIsWeb) {
-        if (!isWebMobile()) {
+      if (show) {
           return Container();
         }
-      }
       return AnimatedPositioned(
           bottom: state is ASAnimForward ? 0 : -500,
           duration: const Duration(milliseconds: 400),
@@ -157,8 +158,10 @@ abstract class Screen extends StatelessWidget {
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20)),
                 border:
-                    Border.fromBorderSide(BorderSide(color: Colors.black38))),
-            width: MediaQuery.sizeOf(prefs.context()).width,
+                Border.fromBorderSide(BorderSide(color: Colors.black38))),
+            width: MediaQuery
+                .sizeOf(prefs.context())
+                .width,
             child: Column(
               children: [
                 Container(
