@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jazzve_web/screen/home/screen.dart';
 import 'package:jazzve_web/screen/login/screen.dart';
 import 'package:jazzve_web/screen/splash/screen.dart';
+import 'package:jazzve_web/tools/app_websocket.dart';
 import 'package:jazzve_web/tools/bloc.dart';
 import 'package:jazzve_web/tools/prefs.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -66,8 +67,9 @@ class App extends StatelessWidget {
         String version = packageInfo.version;
         String buildNumber = packageInfo.buildNumber;
         prefs.setString('appversion', '$version.$buildNumber');
-
+      AppWebSocket.instance = AppWebSocket();
     }
+
      if ((prefs.getString('bearer') ?? '').isNotEmpty) {
        final response = await http
            .post(Uri.https(prefs.webHost(), 'engine/index.php'),

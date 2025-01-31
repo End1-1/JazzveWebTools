@@ -84,6 +84,12 @@ extension ScreenMenu on Screen {
                                   locale().dishRemovalRequest,
                                   Screen.currentPageName ==
                                       'dishRemovalRequest'),
+                              _menuItem(
+                                  _goodsMovement,
+                                  'assets/removedish.png',
+                                  locale().goodsMovement,
+                                  Screen.currentPageName ==
+                                      'goodsMovement'),
                               rowSpace(),
                               Row(
                                 children: [
@@ -151,6 +157,13 @@ extension ScreenMenu on Screen {
     Screen.currentPageName = 'dishRemovalRequest';
     Navigator.push(prefs.context(),
         MaterialPageRoute(builder: (builder) => DishRemovalRequestScreen()));
+  }
+
+  void _goodsMovement() {
+    hideMenu();
+    Screen.currentPageName = 'goodsMovement';
+    Navigator.push(prefs.context(),
+        MaterialPageRoute(builder: (builder) => DashboardScreen(title: '')));
   }
 
   void _revenu() {

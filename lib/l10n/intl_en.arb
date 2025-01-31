@@ -25,5 +25,6 @@
   "no": "No",
   "dish": "Dish",
   "qty": "Quantity",
-  "price": "Price"
+  "price": "Price",
+  "goodsMovement": "Goods movement"
 }
